@@ -1,0 +1,314 @@
+/* Apple Design System & Squircle Minimalist UI Architecture */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Apple Color System (Light Default) */
+  --bg-primary: #f5f5f7;
+  --bg-surface: #ffffff;
+  --bg-surface-secondary: #fbfbfd;
+  --bg-elevated: #ffffff;
+  --bg-frosted: rgba(255, 255, 255, 0.82);
+  
+  --text-primary: #1d1d1f;      /* Apple deep charcoal */
+  --text-secondary: #6e6e73;    /* Apple secondary gray */
+  --text-tertiary: #86868b;     /* Apple tertiary gray */
+  --text-quaternary: #aeaeb2;
+
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border-medium: rgba(0, 0, 0, 0.09);
+  
+  --accent: #0071e3;            /* Apple Signature Blue */
+  --accent-hover: #0077ed;
+  --accent-subtle: rgba(0, 113, 227, 0.08);
+
+  --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  /* Squircles & Radii */
+  --radius-squircle-sm: 16px;
+  --radius-squircle: 24px;
+  --radius-squircle-lg: 32px;
+  --radius-pill: 9999px;
+  
+  /* Apple Soft Diffusion Shadows */
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-floating: 0 20px 48px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark Mode Tokens (Apple Pro Dark) */
+.dark {
+  --bg-primary: #000000;
+  --bg-surface: #161617;
+  --bg-surface-secondary: #1c1c1e;
+  --bg-elevated: #2c2c2e;
+  --bg-frosted: rgba(22, 22, 23, 0.85);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #6e6e73;
+  --text-quaternary: #48484a;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+
+  --accent: #2997ff;
+  --accent-hover: #40a9ff;
+  --accent-subtle: rgba(41, 151, 255, 0.15);
+
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.7);
+  --shadow-floating: 0 24px 60px rgba(0, 0, 0, 0.9);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-apple);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  letter-spacing: -0.011em;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Apple Typography Scaled Letter-Spacing */
+.apple-headline {
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.apple-subhead {
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+
+.apple-body {
+  letter-spacing: -0.012em;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Apple Squircle Cards */
+.squircle-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-squircle-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease;
+}
+
+.squircle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-medium);
+}
+
+.squircle-pill {
+  border-radius: var(--radius-pill);
+}
+
+/* Frosted Acrylic / Glass Header */
+.apple-header {
+  background: var(--bg-frosted);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Segmented Control / Apple Tabs */
+.apple-segmented-container {
+  background-color: rgba(0, 0, 0, 0.04);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  gap: 2px;
+  border: 1px solid var(--border-subtle);
+}
+
+.dark .apple-segmented-container {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.apple-segment-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.apple-segment-btn:hover {
+  color: var(--text-primary);
+}
+
+.apple-segment-btn.active {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Apple Primary Button */
+.apple-btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-surface);
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+.apple-btn-primary:hover {
+  opacity: 0.92;
+  transform: scale(1.015);
+}
+
+.apple-btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Apple Secondary Button */
+.apple-btn-secondary {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+.dark .apple-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.apple-btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.dark .apple-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Apple Blue Accent Link with Chevron */
+.apple-link-blue {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  transition: gap 0.2s ease, opacity 0.2s ease;
+}
+
+.apple-link-blue:hover {
+  gap: 7px;
+  opacity: 0.9;
+}
+
+/* Subtle Apple Tags */
+.apple-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-surface-secondary);
+  border: 1px solid var(--border-subtle);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Custom Scrollbar - Minimal Apple Mac Style */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Smooth Transitions */
+.modal-overlay {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--radius-squircle-lg);
+  box-shadow: var(--shadow-floating);
+}
+.modal-overlay.active .modal-content {
+  transform: scale(1) translateY(0);
+}
+
+/* Toast */
+.toast-slide {
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-slide.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media print {
+  nav, footer, #contact, #stats-bar, .no-print {
+    display: none !important;
+  }
+}

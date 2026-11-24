@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aadhithya Kumar — Full Stack Developer & WordPress Specialist</title>
+  <meta name="description" content="Portfolio of Aadhithya Roopa Preetha Jayantha Kumar — Full Stack Developer specializing in PHP, Python, MySQL, and WordPress. Warsaw, Poland.">
+  <meta name="author" content="Aadhithya Roopa Preetha Jayantha Kumar">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            apple: {
+              bg: '#f5f5f7',
+              surface: '#ffffff',
+              dark: '#1d1d1f',
+              gray: '#86868b',
+              lightGray: '#fbfbfd',
+              blue: '#0071e3',
+              blueHover: '#0077ed'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Plus Jakarta Sans"', 'Helvetica', 'Arial', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Apple Minimalist Stylesheet -->
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#000000] dark:text-[#f5f5f7] transition-colors duration-300">
+
+  <!-- Apple Frosted Header -->
+  <header class="sticky top-0 z-40 w-full apple-header">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Identity -->
+      <a href="#hero" class="flex items-center gap-2.5 text-[#1d1d1f] dark:text-[#f5f5f7] hover:opacity-80 transition-opacity">
+        <span class="w-8 h-8 rounded-full bg-[#1d1d1f] dark:bg-[#f5f5f7] text-[#ffffff] dark:text-[#1d1d1f] flex items-center justify-center font-semibold text-xs tracking-tight">
+          AK
+        </span>
+        <span class="font-semibold text-sm tracking-tight hidden sm:inline">
+          Aadhithya Kumar
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-[13px] font-medium text-[#6e6e73] dark:text-[#a1a1a6]">
+        <a href="#about" class="nav-link hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">About</a>
+        <a href="#projects" class="nav-link hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">Projects</a>
+        <a href="#experience" class="nav-link hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">Experience</a>
+        <a href="#skills" class="nav-link hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">Skills</a>
+        <a href="#services" class="nav-link hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">Services</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-[#6e6e73] dark:text-[#a1a1a6] transition-colors" title="Toggle appearance" aria-label="Toggle appearance">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+
+        <!-- View Resume CTA -->
+        <button onclick="openResumeModal()" class="apple-btn-secondary !py-1.5 !px-3.5 !text-xs hidden sm:inline-flex">
+          <span>View CV</span>
+        </button>
+
+        <!-- Get In Touch CTA -->
+        <a href="#contact" class="apple-btn-primary !py-1.5 !px-3.5 !text-xs">
+          <span>Contact</span>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" class="p-2 rounded-full hover:bg-black/[0.04] dark:hover:bg-white/[0.08] md:hidden text-[#1d1d1f] dark:text-[#f5f5f7]" aria-label="Open menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 py-4 bg-[#ffffff] dark:bg-[#161617] border-b border-black/[0.06] dark:border-white/[0.08] space-y-3 text-sm">
+      <a href="#about" class="mobile-nav-link block py-1.5 text-[#1d1d1f] dark:text-[#f5f5f7]">About</a>
+      <a href="#projects" class="mobile-nav-link block py-1.5 text-[#1d1d1f] dark:text-[#f5f5f7]">Projects</a>
+      <a href="#experience" class="mobile-nav-link block py-1.5 text-[#1d1d1f] dark:text-[#f5f5f7]">Experience</a>
+      <a href="#skills" class="mobile-nav-link block py-1.5 text-[#1d1d1f] dark:text-[#f5f5f7]">Skills</a>
+      <a href="#services" class="mobile-nav-link block py-1.5 text-[#1d1d1f] dark:text-[#f5f5f7]">Services</a>
+      <div class="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] flex gap-2">
+        <button onclick="openResumeModal()" class="apple-btn-secondary !text-xs flex-1">View CV</button>
+        <a href="#contact" class="apple-btn-primary !text-xs flex-1 text-center">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="pt-16 pb-20 md:pt-28 md:pb-32">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center">
+        
+        <!-- Status Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ffffff] dark:bg-[#1c1c1e] border border-black/[0.06] dark:border-white/[0.08] text-xs font-medium text-[#6e6e73] dark:text-[#a1a1a6] shadow-sm mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Warsaw, Poland • Open for Full-Time & Contract Roles</span>
+        </div>
+
+        <!-- Apple Headline -->
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] leading-[1.08] max-w-4xl mx-auto">
+          Web engineering, crafted with purpose.
+        </h1>
+
+        <!-- Subheading Copy -->
+        <p class="mt-6 text-lg sm:text-xl md:text-2xl text-[#86868b] font-normal leading-relaxed max-w-3xl mx-auto tracking-tight">
+          I’m <span class="text-[#1d1d1f] dark:text-[#f5f5f7] font-semibold">Aadhithya Kumar</span>. With 2 years of agency experience at Suffix E Solutions, I build responsive, robust full-stack applications with PHP, Python, MySQL, and WordPress.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3.5 mt-9">
+          <a href="#projects" class="apple-btn-primary !text-sm !py-3 !px-6 shadow-sm">
+            <span>Explore 8+ Live Projects</span>
+          </a>
+          <button onclick="openResumeModal()" class="apple-btn-secondary !text-sm !py-3 !px-6">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>Curriculum Vitae</span>
+          </button>
+          <a href="#contact" class="apple-link-blue !text-sm px-3 py-2">
+            <span>Get in touch</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Key Stats Metrics Row (Squircle Cards) -->
+        <div class="mt-16 sm:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto" id="stats-container">
+          <!-- Rendered by JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Selected Projects Section (Featured Showcase) -->
+    <section id="projects" class="py-20 md:py-28 bg-[#ffffff] dark:bg-[#161617] border-y border-black/[0.05] dark:border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+              Selected Work
+            </span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+              Live Production Sites.
+            </h2>
+            <p class="text-base text-[#86868b] mt-2 max-w-xl">
+              Commercial platforms deployed for hospitality brands, healthcare providers, corporate agencies, and educational institutions.
+            </p>
+          </div>
+
+          <!-- Apple Segmented Control Tabs -->
+          <div class="apple-segmented-container self-start md:self-auto overflow-x-auto max-w-full">
+            <button class="apple-segment-btn active" data-category="all">All (9)</button>
+            <button class="apple-segment-btn" data-category="ecommerce">E-Commerce</button>
+            <button class="apple-segment-btn" data-category="hospitality">Hospitality</button>
+            <button class="apple-segment-btn" data-category="corporate">Corporate</button>
+            <button class="apple-segment-btn" data-category="education">Education</button>
+          </div>
+        </div>
+
+        <!-- Projects Grid (Squircle Cards) -->
+        <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About & Narrative Section -->
+    <section id="about" class="py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        
+        <div class="max-w-2xl mb-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+            Background & Philosophy
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+            Crafting reliable software with clarity.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          <!-- Story Block (8 cols) -->
+          <div class="lg:col-span-8 squircle-card p-8 sm:p-10 flex flex-col justify-between">
+            <div>
+              <h3 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] tracking-tight mb-4">
+                Full-Stack Delivery & Real-World Client Impact
+              </h3>
+              <p class="text-base text-[#515154] dark:text-[#a1a1a6] leading-relaxed mb-5">
+                Over nearly two years at <strong>Suffix E Solutions Pvt. Ltd.</strong> in Trivandrum, India, I led the full delivery lifecycle for client websites—translating stakeholder requirements into responsive frontend layouts, architecting MySQL schemas, and building robust server-side workflows in PHP and Python.
+              </p>
+              <p class="text-base text-[#515154] dark:text-[#a1a1a6] leading-relaxed mb-6">
+                Now based in <strong>Warsaw, Poland</strong>, I bring this proven foundation of end-to-end reliability, speed optimization, and cross-functional client communication to engineering teams and forward-thinking companies.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-black/[0.05] dark:border-white/[0.06]">
+              <div>
+                <div class="text-xs uppercase font-semibold text-[#86868b]">Experience</div>
+                <div class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">2 Years (2022–2024)</div>
+                <div class="text-xs text-[#86868b] mt-0.5">Suffix E Solutions</div>
+              </div>
+
+              <div>
+                <div class="text-xs uppercase font-semibold text-[#86868b]">Location</div>
+                <div class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">Warsaw, Poland</div>
+                <div class="text-xs text-[#86868b] mt-0.5">Full-time / Remote</div>
+              </div>
+
+              <div>
+                <div class="text-xs uppercase font-semibold text-[#86868b]">Education</div>
+                <div class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">Bachelor of Commerce</div>
+                <div class="text-xs text-[#86868b] mt-0.5">Univ. of Mysore (2020)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Language & Soft Skills (4 cols) -->
+          <div class="lg:col-span-4 squircle-card p-8 sm:p-10 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+                Languages
+              </span>
+              <h4 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] tracking-tight mt-1 mb-5">
+                Multilingual Fluency
+              </h4>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between py-2 border-b border-black/[0.04] dark:border-white/[0.06]">
+                  <span class="text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">English</span>
+                  <span class="text-xs text-[#86868b]">Fluent / Professional</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-black/[0.04] dark:border-white/[0.06]">
+                  <span class="text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">Malayalam</span>
+                  <span class="text-xs text-[#86868b]">Native</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-black/[0.04] dark:border-white/[0.06]">
+                  <span class="text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">Hindi</span>
+                  <span class="text-xs text-[#86868b]">Conversational</span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">Tamil</span>
+                  <span class="text-xs text-[#86868b]">Conversational</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-black/[0.05] dark:border-white/[0.06] mt-6">
+              <a href="mailto:aadhithyaroopapj@gmail.com" class="apple-link-blue text-sm font-medium">
+                <span>Contact directly</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="py-20 md:py-28 bg-[#ffffff] dark:bg-[#161617] border-y border-black/[0.05] dark:border-white/[0.06]">
+      <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+            Career Path
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+            Professional Experience.
+          </h2>
+        </div>
+
+        <div id="experience-container">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills & Capabilities Section -->
+    <section id="skills" class="py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        
+        <div class="max-w-2xl mb-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+            Technical Stack
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+            Core Competencies.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="squircle-card p-7">
+            <h3 class="text-base font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
+              Frontend & UI
+            </h3>
+            <div id="skills-frontend"></div>
+          </div>
+
+          <div class="squircle-card p-7">
+            <h3 class="text-base font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
+              Backend & APIs
+            </h3>
+            <div id="skills-backend"></div>
+          </div>
+
+          <div class="squircle-card p-7">
+            <h3 class="text-base font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
+              Database & CMS
+            </h3>
+            <div id="skills-database"></div>
+          </div>
+
+          <div class="squircle-card p-7">
+            <h3 class="text-base font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4 pb-3 border-b border-black/[0.06] dark:border-white/[0.08]">
+              Tools & Workflow
+            </h3>
+            <div id="skills-tools"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 md:py-28 bg-[#ffffff] dark:bg-[#161617] border-y border-black/[0.05] dark:border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        
+        <div class="max-w-2xl mb-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+            Capabilities
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+            What I Deliver.
+          </h2>
+        </div>
+
+        <div id="services-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Rendered via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section id="education" class="py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        
+        <div class="max-w-2xl mb-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+            Academic & Industry Training
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+            Education & Certifications.
+          </h2>
+        </div>
+
+        <div id="education-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Rendered via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-28 bg-[#ffffff] dark:bg-[#161617] border-t border-black/[0.05] dark:border-white/[0.06]">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+            Get In Touch
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mt-1.5">
+            Let's build something remarkable.
+          </h2>
+          <p class="text-base text-[#86868b] mt-3">
+            Open to full-time roles, contracts, and new project consultations.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          
+          <!-- Contact Details (5 cols) -->
+          <div class="md:col-span-5 space-y-4">
+            <div class="squircle-card p-6">
+              <div class="text-xs font-semibold uppercase text-[#86868b] mb-1">Email</div>
+              <div class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">aadhithyaroopapj@gmail.com</div>
+              <button onclick="copyToClipboard('aadhithyaroopapj@gmail.com', 'Email')" class="text-xs text-[#0071e3] dark:text-[#2997ff] font-medium mt-1 inline-flex items-center gap-1 hover:underline">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy to clipboard
+              </button>
+            </div>
+
+            <div class="squircle-card p-6">
+              <div class="text-xs font-semibold uppercase text-[#86868b] mb-1">Phone & WhatsApp</div>
+              <a href="tel:+48729367154" class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] hover:text-[#0071e3] transition-colors">
+                +48 729 367 154
+              </a>
+              <div class="text-xs text-[#86868b] mt-0.5">Poland (+48)</div>
+            </div>
+
+            <div class="squircle-card p-6">
+              <div class="text-xs font-semibold uppercase text-[#86868b] mb-1">Location</div>
+              <div class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">Warsaw, Poland</div>
+              <div class="text-xs text-[#86868b] mt-0.5">Available locally and for remote teams</div>
+            </div>
+          </div>
+
+          <!-- Message Form (7 cols) -->
+          <div class="md:col-span-7">
+            <div class="squircle-card p-8">
+              <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-1">Send a Message</h3>
+              <p class="text-xs text-[#86868b] mb-6">Launches directly to your default email client.</p>
+
+              <form id="contact-form" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="contact-name" class="block text-xs font-medium text-[#6e6e73] dark:text-[#a1a1a6] mb-1">Name</label>
+                    <input type="text" id="contact-name" required placeholder="Your name" 
+                           class="w-full px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-sm text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0071e3] transition-colors">
+                  </div>
+                  <div>
+                    <label for="contact-email" class="block text-xs font-medium text-[#6e6e73] dark:text-[#a1a1a6] mb-1">Email</label>
+                    <input type="email" id="contact-email" required placeholder="name@example.com" 
+                           class="w-full px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-sm text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0071e3] transition-colors">
+                  </div>
+                </div>
+
+                <div>
+                  <label for="contact-subject" class="block text-xs font-medium text-[#6e6e73] dark:text-[#a1a1a6] mb-1">Subject</label>
+                  <input type="text" id="contact-subject" placeholder="Project or Opportunity" 
+                         class="w-full px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-sm text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0071e3] transition-colors">
+                </div>
+
+                <div>
+                  <label for="contact-message" class="block text-xs font-medium text-[#6e6e73] dark:text-[#a1a1a6] mb-1">Message</label>
+                  <textarea id="contact-message" required rows="4" placeholder="How can I help you?" 
+                            class="w-full px-4 py-2.5 rounded-xl bg-black/[0.03] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-sm text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0071e3] transition-colors resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="apple-btn-primary w-full !py-3">
+                  <span>Send Message</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-black/[0.05] dark:border-white/[0.06] text-xs text-[#86868b]">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 <strong>Aadhithya Roopa Preetha Jayantha Kumar</strong>. All rights reserved.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">Back to top ↑</a>
+        <a href="mailto:aadhithyaroopapj@gmail.com" class="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">Email</a>
+        <a href="tel:+48729367154" class="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors">+48 729 367 154</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Details Modal (Apple Sheet Style) -->
+  <div id="project-modal" class="modal-overlay fixed inset-0 z-50 bg-black/40 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content bg-[#ffffff] dark:bg-[#1c1c1e] max-w-xl w-full max-h-[85vh] overflow-y-auto p-8 relative border border-black/[0.08] dark:border-white/[0.1]">
+      <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full hover:bg-black/[0.05] dark:hover:bg-white/[0.1] text-[#86868b] transition-colors" aria-label="Close modal">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-2 mb-2">
+        <span id="modal-category" class="text-xs uppercase font-semibold text-[#0071e3] dark:text-[#2997ff]">Category</span>
+        <span class="text-[#86868b]">•</span>
+        <span id="modal-status" class="text-xs text-[#86868b]">Live Production</span>
+      </div>
+
+      <h3 id="modal-title" class="text-2xl font-bold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">Project Title</h3>
+      
+      <p id="modal-description" class="text-sm text-[#515154] dark:text-[#a1a1a6] leading-relaxed mb-6"></p>
+
+      <div class="mb-6">
+        <h4 class="text-xs uppercase tracking-wider font-semibold text-[#86868b] mb-3">Contributions</h4>
+        <ul id="modal-contributions" class="space-y-2.5"></ul>
+      </div>
+
+      <div class="mb-6">
+        <h4 class="text-xs uppercase tracking-wider font-semibold text-[#86868b] mb-2.5">Technologies</h4>
+        <div id="modal-tech" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-black/[0.03] dark:bg-white/[0.06] mb-6">
+        <div class="text-xs uppercase font-semibold text-[#86868b]">Impact</div>
+        <div id="modal-metrics" class="text-xs text-[#1d1d1f] dark:text-[#f5f5f7] font-medium mt-0.5"></div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
+        <button onclick="closeProjectModal()" class="apple-btn-secondary !text-xs !py-2 !px-4">
+          Close
+        </button>
+        <a id="modal-live-link" href="#" target="_blank" rel="noopener noreferrer" 
+           class="apple-btn-primary !text-xs !py-2 !px-4">
+          <span>Visit Website</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Digital Resume Modal -->
+  <div id="resume-modal" class="modal-overlay fixed inset-0 z-50 bg-black/40 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-content bg-[#ffffff] dark:bg-[#1c1c1e] max-w-3xl w-full h-[85vh] flex flex-col p-8 relative border border-black/[0.08] dark:border-white/[0.1]">
+      <div class="flex items-center justify-between pb-4 border-b border-black/[0.06] dark:border-white/[0.08]">
+        <div>
+          <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] tracking-tight">Curriculum Vitae</h3>
+          <p class="text-xs text-[#86868b]">Aadhithya Roopa Preetha Jayantha Kumar</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="assets/resume.html" target="_blank" class="apple-btn-secondary !text-xs !py-1.5 !px-3">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print View</span>
+          </a>
+          <button onclick="closeResumeModal()" class="p-2 rounded-full hover:bg-black/[0.05] dark:hover:bg-white/[0.1] text-[#86868b]">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto mt-6 pr-2 space-y-6 text-sm">
+        <div class="p-6 rounded-2xl bg-black/[0.02] dark:bg-white/[0.04]">
+          <h4 class="text-xl font-bold text-[#1d1d1f] dark:text-[#f5f5f7]">Aadhithya Roopa Preetha Jayantha Kumar</h4>
+          <p class="text-xs text-[#0071e3] font-medium mt-0.5">Assistant Software Developer / Full Stack Developer</p>
+          <p class="text-xs text-[#86868b] mt-1">Warsaw, Poland • aadhithyaroopapj@gmail.com • +48 729367154</p>
+          <p class="text-xs text-[#515154] dark:text-[#a1a1a6] leading-relaxed mt-3">
+            Motivated and detail-oriented Assistant Software Engineer with nearly 2 years of hands-on experience in developing web applications using Python, PHP, and WordPress. Skilled in building responsive, user-friendly interfaces with HTML, CSS, JavaScript, jQuery, and Bootstrap.
+          </p>
+        </div>
+
+        <div>
+          <h5 class="text-xs uppercase tracking-wider font-semibold text-[#86868b] mb-3">Experience</h5>
+          <div class="p-5 rounded-2xl border border-black/[0.06] dark:border-white/[0.08]">
+            <div class="flex justify-between items-baseline">
+              <h6 class="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">Assistant Software Engineer</h6>
+              <span class="text-xs text-[#86868b]">Jan 2022 – Nov 2023</span>
+            </div>
+            <div class="text-xs text-[#0071e3] font-medium">Suffix E Solution, Trivandrum</div>
+            <ul class="mt-3 space-y-1.5 text-xs text-[#515154] dark:text-[#a1a1a6] list-disc list-inside">
+              <li>Developed and maintained web applications using Python and PHP for backend logic and database management.</li>
+              <li>Built and customized WordPress websites, ensuring responsive design and SEO optimization.</li>
+              <li>Created responsive front-end interfaces using HTML, CSS, JavaScript, jQuery, and Bootstrap.</li>
+              <li>Handled client communications via meetings, calls, and emails to understand and deliver project requirements.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl border border-black/[0.06] dark:border-white/[0.08]">
+            <h5 class="text-xs uppercase tracking-wider font-semibold text-[#86868b] mb-2">Education</h5>
+            <div class="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] text-sm">Bachelor of Commerce</div>
+            <div class="text-xs text-[#86868b]">University of Mysore, Karnataka (May 2020)</div>
+          </div>
+          <div class="p-5 rounded-2xl border border-black/[0.06] dark:border-white/[0.08]">
+            <h5 class="text-xs uppercase tracking-wider font-semibold text-[#86868b] mb-2">Certifications</h5>
+            <div class="text-xs text-[#515154] dark:text-[#a1a1a6] space-y-1">
+              <div>• Intensive Internship – Scope India (2021)</div>
+              <div>• Future of IT, Data Science & AI/ML (2023)</div>
+              <div>• Computer Hardware & Network (2016)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimal Toast -->
+  <div id="toast" class="toast-slide fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#1d1d1f] text-[#ffffff] text-xs font-medium shadow-lg">
+    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
