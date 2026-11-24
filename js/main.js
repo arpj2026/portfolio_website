@@ -1,4 +1,4 @@
-// Apple-Inspired Minimalist Portfolio Logic for Aadhithya Kumar
+// Apple-Inspired Minimalist Portfolio Logic + Cool Interactive Effects for Aadhithya Kumar
 
 document.addEventListener('DOMContentLoaded', () => {
   const data = window.PORTFOLIO_DATA;
@@ -18,20 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
   setupContactForm(data.personal);
   setupMobileMenu();
   setupScrollSpy();
-  setupResumeModal(data);
+  setupResumeModal();
+
+  // Cool Effects & Interactive Animations
+  initScrollProgress();
+  initScrollReveal();
+  initTypewriter();
+  initStatsCounter();
+  initCardSpotlights();
+  initCuteDownloadSparkles();
 
   if (window.lucide) {
     window.lucide.createIcons();
   }
 });
 
-// Apple Minimalist Theme Controller (Defaults to Light with smooth Apple Dark toggle)
+// 1. Theme Controller
 function initTheme() {
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
   const html = document.documentElement;
 
-  // Default to light mode for Apple clean white contrast aesthetic, unless user previously set dark
   const savedTheme = localStorage.getItem('portfolio-apple-theme');
   if (savedTheme === 'dark') {
     html.classList.add('dark');
@@ -54,15 +61,187 @@ function initTheme() {
   if (themeToggleMobileBtn) themeToggleMobileBtn.addEventListener('click', toggleTheme);
 }
 
-// Render Apple-style Stats Bar
+// 2. Reading Scroll Progress Bar
+function initScrollProgress() {
+  const progressBar = document.getElementById('scroll-progress');
+  if (!progressBar) return;
+
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / totalHeight) * 100;
+    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+  });
+}
+
+// 3. Scroll Reveal Observer (Fade + Slide Up)
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal');
+  if (!revealElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // Unobserve once animated so it doesn't re-trigger unnecessarily
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
+// 4. Hero Role Typing / Cycler Animation
+function initTypewriter() {
+  const el = document.getElementById('typewriter-text');
+  if (!el) return;
+
+  const roles = [
+    "Full Stack Developer",
+    "PHP & MySQL Specialist",
+    "WordPress Theme Architect",
+    "Responsive Frontend Engineer",
+    "CRUD & Database Specialist"
+  ];
+
+  let roleIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  let typingSpeed = 90;
+
+  function type() {
+    const currentRole = roles[roleIdx];
+
+    if (isDeleting) {
+      el.textContent = currentRole.substring(0, charIdx - 1);
+      charIdx--;
+      typingSpeed = 40;
+    } else {
+      el.textContent = currentRole.substring(0, charIdx + 1);
+      charIdx++;
+      typingSpeed = 85;
+    }
+
+    if (!isDeleting && charIdx === currentRole.length) {
+      typingSpeed = 2200; // Pause at full word
+      isDeleting = true;
+    } else if (isDeleting && charIdx === 0) {
+      isDeleting = false;
+      roleIdx = (roleIdx + 1) % roles.length;
+      typingSpeed = 400; // Pause before typing new word
+    }
+
+    setTimeout(type, typingSpeed);
+  }
+
+  type();
+}
+
+// 5. Hero Stats Animated Counter
+function initStatsCounter() {
+  const statsContainer = document.getElementById('stats-container');
+  if (!statsContainer) return;
+
+  let animated = false;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        animateNumbers();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(statsContainer);
+
+  function animateNumbers() {
+    const valueElements = statsContainer.querySelectorAll('.counter-val');
+    valueElements.forEach(el => {
+      const targetStr = el.getAttribute('data-target') || el.innerText;
+      const numMatch = targetStr.match(/\d+/);
+      if (!numMatch) return;
+
+      const targetNum = parseInt(numMatch[0], 10);
+      const suffix = targetStr.replace(numMatch[0], '');
+      let current = 0;
+      const duration = 1400;
+      const stepTime = 25;
+      const totalSteps = duration / stepTime;
+      const increment = targetNum / totalSteps;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= targetNum) {
+          el.innerText = `${targetNum}${suffix}`;
+          clearInterval(timer);
+        } else {
+          el.innerText = `${Math.floor(current)}${suffix}`;
+        }
+      }, stepTime);
+    });
+  }
+}
+
+// 6. Interactive Card Mouse Spotlight / Micro-Tilt
+function initCardSpotlights() {
+  const cards = document.querySelectorAll('.squircle-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+}
+
+// 7. Cute ATS Download Button Sparkle Particles
+function initCuteDownloadSparkles() {
+  const downloadBtns = document.querySelectorAll('a[download]');
+  downloadBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      createSparkleBurst(e.clientX, e.clientY);
+      showToast('🎉 ATS CV downloaded successfully!');
+    });
+  });
+
+  function createSparkleBurst(x, y) {
+    const colors = ['#10b981', '#0071e3', '#06b6d4', '#f59e0b', '#3b82f6'];
+    for (let i = 0; i < 16; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'sparkle';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.backgroundColor = color;
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      const angle = (Math.PI * 2 * i) / 16;
+      const distance = 40 + Math.random() * 50;
+      const dx = `${Math.cos(angle) * distance}px`;
+      const dy = `${Math.sin(angle) * distance}px`;
+
+      particle.style.setProperty('--dx', dx);
+      particle.style.setProperty('--dy', dy);
+
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 800);
+    }
+  }
+}
+
+// Render Stats Bar with Counter Classes
 function renderHeroStats(stats) {
   const container = document.getElementById('stats-container');
   if (!container) return;
 
-  container.innerHTML = stats.map(stat => `
-    <div class="squircle-card p-6 sm:p-7 text-center flex flex-col items-center justify-center">
+  container.innerHTML = stats.map((stat, idx) => `
+    <div class="squircle-card p-6 sm:p-7 text-center flex flex-col items-center justify-center reveal delay-${(idx % 4) + 1}">
       <div class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7]">
-        ${stat.value}
+        <span class="counter-val" data-target="${stat.value}">${stat.value}</span>
       </div>
       <div class="text-xs sm:text-sm font-normal text-[#86868b] mt-1.5">
         ${stat.label}
@@ -71,13 +250,13 @@ function renderHeroStats(stats) {
   `).join('');
 }
 
-// Render Experience with Apple Squircle Container
+// Render Experience with Squircle Containers & Reveal Animation
 function renderExperience(experienceList) {
   const container = document.getElementById('experience-container');
   if (!container) return;
 
   container.innerHTML = experienceList.map(exp => `
-    <div class="squircle-card p-8 sm:p-10 relative">
+    <div class="squircle-card p-8 sm:p-10 relative reveal">
       <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-3 pb-6 border-b border-black/[0.06] dark:border-white/[0.08]">
         <div>
           <span class="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
@@ -130,7 +309,7 @@ function renderExperience(experienceList) {
   `).join('');
 }
 
-// Render Skills Matrix (Apple Style Clean Cards)
+// Render Skills Matrix
 function renderSkills(skillsData) {
   const renderSkillGroup = (skills) => skills.map(s => `
     <div class="py-2.5 border-b border-black/[0.04] dark:border-white/[0.06] last:border-0 flex items-center justify-between">
@@ -152,7 +331,7 @@ function renderSkills(skillsData) {
   if (toolsEl) toolsEl.innerHTML = renderSkillGroup(skillsData.toolsAndWorkflow);
 }
 
-// Render Apple-Style Project Showcase
+// Render Project Showcase
 function renderProjects(projectsList, activeCategory) {
   const container = document.getElementById('projects-container');
   if (!container) return;
@@ -170,10 +349,9 @@ function renderProjects(projectsList, activeCategory) {
     return;
   }
 
-  container.innerHTML = filtered.map(project => `
-    <div class="squircle-card p-7 flex flex-col justify-between group">
+  container.innerHTML = filtered.map((project, idx) => `
+    <div class="squircle-card p-7 flex flex-col justify-between group reveal delay-${(idx % 3) + 1}">
       <div>
-        <!-- Top Metadata -->
         <div class="flex items-center justify-between gap-2 mb-3">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
             ${project.categoryLabel}
@@ -184,7 +362,6 @@ function renderProjects(projectsList, activeCategory) {
           </span>
         </div>
 
-        <!-- Title & Subtitle -->
         <h3 class="text-xl sm:text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] tracking-tight group-hover:text-[#0071e3] dark:group-hover:text-[#2997ff] transition-colors">
           ${project.title}
         </h3>
@@ -193,12 +370,10 @@ function renderProjects(projectsList, activeCategory) {
           ${project.tagline}
         </p>
 
-        <!-- Description -->
         <p class="text-[#515154] dark:text-[#a1a1a6] text-sm leading-relaxed mb-6 line-clamp-3">
           ${project.description}
         </p>
 
-        <!-- Clean Minimal Tags -->
         <div class="flex flex-wrap gap-1.5 mb-6">
           ${project.technologies.slice(0, 4).map(t => `
             <span class="text-xs px-2.5 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.06] text-[#6e6e73] dark:text-[#a1a1a6] border border-black/[0.04] dark:border-white/[0.06]">
@@ -213,7 +388,6 @@ function renderProjects(projectsList, activeCategory) {
         </div>
       </div>
 
-      <!-- Action Row (Apple Minimal Links) -->
       <div class="pt-5 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center justify-between gap-3 mt-auto">
         ${project.url !== '#' ? `
           <a href="${project.url}" target="_blank" rel="noopener noreferrer" 
@@ -235,9 +409,11 @@ function renderProjects(projectsList, activeCategory) {
   `).join('');
 
   if (window.lucide) window.lucide.createIcons();
+  initScrollReveal();
+  initCardSpotlights();
 }
 
-// Apple Segmented Control for Project Filters
+// Project Category Filters
 function setupProjectFilters(projectsList) {
   const buttons = document.querySelectorAll('.apple-segment-btn');
   buttons.forEach(btn => {
@@ -250,13 +426,13 @@ function setupProjectFilters(projectsList) {
   });
 }
 
-// Render Apple-style Services
+// Render Services
 function renderServices(services) {
   const container = document.getElementById('services-container');
   if (!container) return;
 
-  container.innerHTML = services.map(s => `
-    <div class="squircle-card p-7 sm:p-8 flex flex-col justify-between">
+  container.innerHTML = services.map((s, idx) => `
+    <div class="squircle-card p-7 sm:p-8 flex flex-col justify-between reveal delay-${(idx % 4) + 1}">
       <div>
         <div class="w-10 h-10 rounded-2xl bg-black/[0.04] dark:bg-white/[0.08] text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center justify-center mb-5">
           <i data-lucide="${s.icon}" class="w-5 h-5"></i>
@@ -288,8 +464,8 @@ function renderEducationAndCerts(items) {
   const container = document.getElementById('education-container');
   if (!container) return;
 
-  container.innerHTML = items.map(item => `
-    <div class="squircle-card p-6 sm:p-7 flex flex-col justify-between">
+  container.innerHTML = items.map((item, idx) => `
+    <div class="squircle-card p-6 sm:p-7 flex flex-col justify-between reveal delay-${(idx % 4) + 1}">
       <div>
         <div class="flex items-center justify-between gap-2 mb-3">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
@@ -385,10 +561,10 @@ function showToast(message) {
 
   setTimeout(() => {
     toast.classList.remove('show');
-  }, 3000);
+  }, 3200);
 }
 
-// Contact Form Handler (Direct Clean Feedback)
+// Contact Form Handler
 function setupContactForm(personalData) {
   const form = document.getElementById('contact-form');
   if (!form) return;

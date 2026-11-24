@@ -1,6 +1,6 @@
-/* Apple Design System & Squircle Minimalist UI Architecture */
+/* Apple Design System & Squircle Minimalist UI Architecture + Cool Effects */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   /* Apple Color System (Light Default) */
@@ -8,19 +8,18 @@
   --bg-surface: #ffffff;
   --bg-surface-secondary: #fbfbfd;
   --bg-elevated: #ffffff;
-  --bg-frosted: rgba(255, 255, 255, 0.82);
+  --bg-frosted: rgba(255, 255, 255, 0.85);
   
   --text-primary: #1d1d1f;      /* Apple deep charcoal */
   --text-secondary: #6e6e73;    /* Apple secondary gray */
   --text-tertiary: #86868b;     /* Apple tertiary gray */
-  --text-quaternary: #aeaeb2;
 
   --border-subtle: rgba(0, 0, 0, 0.05);
-  --border-medium: rgba(0, 0, 0, 0.09);
+  --border-medium: rgba(0, 0, 0, 0.1);
   
   --accent: #0071e3;            /* Apple Signature Blue */
   --accent-hover: #0077ed;
-  --accent-subtle: rgba(0, 113, 227, 0.08);
+  --accent-emerald: #10b981;
 
   --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   
@@ -32,9 +31,9 @@
   
   /* Apple Soft Diffusion Shadows */
   --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
-  --shadow-floating: 0 20px 48px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-floating: 0 24px 50px rgba(0, 0, 0, 0.12), 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
 /* Dark Mode Tokens (Apple Pro Dark) */
@@ -43,23 +42,22 @@
   --bg-surface: #161617;
   --bg-surface-secondary: #1c1c1e;
   --bg-elevated: #2c2c2e;
-  --bg-frosted: rgba(22, 22, 23, 0.85);
+  --bg-frosted: rgba(22, 22, 23, 0.88);
 
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
   --text-tertiary: #6e6e73;
-  --text-quaternary: #48484a;
 
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-medium: rgba(255, 255, 255, 0.16);
 
   --accent: #2997ff;
   --accent-hover: #40a9ff;
-  --accent-subtle: rgba(41, 151, 255, 0.15);
+  --accent-emerald: #34d399;
 
   --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
-  --shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.7);
+  --shadow-hover: 0 16px 44px rgba(0, 0, 0, 0.7);
   --shadow-floating: 0 24px 60px rgba(0, 0, 0, 0.9);
 }
 
@@ -85,43 +83,137 @@ body {
   overflow-x: hidden;
 }
 
-/* Apple Typography Scaled Letter-Spacing */
-.apple-headline {
-  letter-spacing: -0.025em;
-  font-weight: 700;
-  line-height: 1.08;
+/* ========================================================
+   1. CUSTOM SCROLLBAR & PROGRESS BAR
+   ======================================================== */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 113, 227, 0.7);
+  border: 1px solid transparent;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(41, 151, 255, 0.8);
 }
 
-.apple-subhead {
-  letter-spacing: -0.015em;
-  font-weight: 600;
+/* Reading Progress Bar on Top */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #0071e3 0%, #10b981 50%, #06b6d4 100%);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px rgba(0, 113, 227, 0.4);
 }
 
-.apple-body {
-  letter-spacing: -0.012em;
-  line-height: 1.5;
-  color: var(--text-secondary);
+/* ========================================================
+   2. SOFT AMBIENT BACKGROUND GLOW
+   ======================================================== */
+.ambient-glow-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.orb-1 {
+  top: -100px;
+  left: 20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.08) 0%, transparent 70%);
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+.orb-2 {
+  top: 600px;
+  right: 10%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, transparent 70%);
+  animation: floatOrb 16s ease-in-out infinite alternate-reverse;
+}
+.dark .orb-1 {
+  background: radial-gradient(circle, rgba(41, 151, 255, 0.12) 0%, transparent 70%);
+}
+.dark .orb-2 {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
 }
 
-/* Apple Squircle Cards */
+@keyframes floatOrb {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(35px) scale(1.05); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+/* ========================================================
+   3. SQUIRCLE CARDS & SPOTLIGHT HOVER EFFECTS
+   ======================================================== */
 .squircle-card {
+  position: relative;
   background-color: var(--bg-surface);
   border-radius: var(--radius-squircle-lg);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.28s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  overflow: hidden;
 }
 
 .squircle-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
   border-color: var(--border-medium);
 }
 
-.squircle-pill {
-  border-radius: var(--radius-pill);
+/* Subtle Card Light Sheen on Hover */
+.squircle-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.06) 25%,
+    transparent 30%
+  );
+  transform: rotate(25deg) translateY(-100%);
+  transition: transform 0.75s ease-in-out;
+  pointer-events: none;
+}
+.squircle-card:hover::after {
+  transform: rotate(25deg) translateY(100%);
 }
 
 /* Frosted Acrylic / Glass Header */
@@ -132,7 +224,78 @@ body {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-/* Segmented Control / Apple Tabs */
+/* ========================================================
+   4. SCROLL REVEAL ANIMATIONS
+   ======================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay helpers */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+/* ========================================================
+   5. DYNAMIC ROLE ROTATOR & TYPING CURSOR
+   ======================================================== */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.15em;
+  background-color: var(--accent);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blinkCursor 0.9s infinite;
+}
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ========================================================
+   6. CUTE DOWNLOAD BUTTON MICRO-INTERACTIONS
+   ======================================================== */
+.cute-btn-pulse {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cute-btn-pulse:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.22);
+}
+.cute-btn-pulse:active {
+  transform: scale(0.97);
+}
+
+/* Sparkle Floating Particle */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  z-index: 99999;
+  animation: popParticle 0.8s ease-out forwards;
+}
+@keyframes popParticle {
+  0% { transform: scale(1) translate(0, 0); opacity: 1; }
+  100% { transform: scale(0) translate(var(--dx), var(--dy)); opacity: 0; }
+}
+
+/* ========================================================
+   7. SEGMENTED CONTROL & BUTTONS
+   ======================================================== */
 .apple-segmented-container {
   background-color: rgba(0, 0, 0, 0.04);
   padding: 4px;
@@ -141,7 +304,6 @@ body {
   gap: 2px;
   border: 1px solid var(--border-subtle);
 }
-
 .dark .apple-segmented-container {
   background-color: rgba(255, 255, 255, 0.08);
 }
@@ -158,11 +320,9 @@ body {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
-
 .apple-segment-btn:hover {
   color: var(--text-primary);
 }
-
 .apple-segment-btn.active {
   background-color: var(--bg-surface);
   color: var(--text-primary);
@@ -170,7 +330,7 @@ body {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-/* Apple Primary Button */
+/* Apple Buttons */
 .apple-btn-primary {
   background-color: var(--text-primary);
   color: var(--bg-surface);
@@ -179,24 +339,22 @@ body {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   border: 1px solid transparent;
 }
-
 .apple-btn-primary:hover {
   opacity: 0.92;
-  transform: scale(1.015);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
-
 .apple-btn-primary:active {
   transform: scale(0.98);
 }
 
-/* Apple Secondary Button */
 .apple-btn-secondary {
   background-color: rgba(0, 0, 0, 0.04);
   color: var(--text-primary);
@@ -205,27 +363,24 @@ body {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   border: 1px solid var(--border-subtle);
 }
-
 .dark .apple-btn-secondary {
   background-color: rgba(255, 255, 255, 0.08);
 }
-
 .apple-btn-secondary:hover {
   background-color: rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
-
 .dark .apple-btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.14);
 }
 
-/* Apple Blue Accent Link with Chevron */
 .apple-link-blue {
   color: var(--accent);
   font-size: 14px;
@@ -236,46 +391,12 @@ body {
   text-decoration: none;
   transition: gap 0.2s ease, opacity 0.2s ease;
 }
-
 .apple-link-blue:hover {
   gap: 7px;
   opacity: 0.9;
 }
 
-/* Subtle Apple Tags */
-.apple-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  background-color: var(--bg-surface-secondary);
-  border: 1px solid var(--border-subtle);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-/* Custom Scrollbar - Minimal Apple Mac Style */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 9999px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-/* Modal Smooth Transitions */
+/* Modals */
 .modal-overlay {
   opacity: 0;
   visibility: hidden;
@@ -308,7 +429,7 @@ body {
 }
 
 @media print {
-  nav, footer, #contact, #stats-bar, .no-print {
+  nav, footer, #contact, #stats-container, .no-print, #scroll-progress, .ambient-glow-wrap {
     display: none !important;
   }
 }
