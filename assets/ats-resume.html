@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aadhithya Roopa Preetha Jayantha Kumar — ATS Resume</title>
+  <style>
+    @page {
+      size: letter portrait;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, Calibri, "Segoe UI", Helvetica, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.35;
+      color: #111111;
+      background: #ffffff;
+      margin: 0;
+      padding: 24px;
+    }
+    @media screen {
+      body {
+        max-width: 820px;
+        margin: 20px auto;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
+      }
+      .screen-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 9999px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .btn-primary {
+        background: #111111;
+        color: #ffffff;
+        border: 1px solid #111111;
+      }
+      .btn-secondary {
+        background: #f1f5f9;
+        color: #111111;
+        border: 1px solid #cbd5e1;
+      }
+    }
+    @media print {
+      body {
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+        font-size: 10pt;
+        line-height: 1.3;
+      }
+      .screen-actions {
+        display: none !important;
+      }
+      a {
+        color: #111111 !important;
+        text-decoration: none !important;
+      }
+    }
+
+    /* Standard ATS Header */
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+      border-bottom: 1.5pt solid #111111;
+      padding-bottom: 10px;
+    }
+    .name {
+      font-size: 20pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 4px 0;
+      color: #000000;
+    }
+    .title {
+      font-size: 12pt;
+      font-weight: 600;
+      color: #333333;
+      margin: 0 0 6px 0;
+    }
+    .contact-info {
+      font-size: 9.5pt;
+      color: #333333;
+    }
+    .contact-info a {
+      color: #0044bb;
+      text-decoration: none;
+    }
+
+    /* ATS Standard Section Headings */
+    h2.section-title {
+      font-size: 11.5pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #000000;
+      border-bottom: 1pt solid #222222;
+      padding-bottom: 3px;
+      margin: 14px 0 8px 0;
+    }
+
+    /* Work Experience & Item Rows */
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .item-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #000000;
+    }
+    .item-date {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #444444;
+      text-align: right;
+    }
+    .item-subtitle {
+      font-size: 10pt;
+      font-style: italic;
+      color: #222222;
+      margin-bottom: 4px;
+    }
+
+    /* Lists */
+    ul {
+      margin: 4px 0 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+      color: #222222;
+    }
+    li strong {
+      color: #000000;
+    }
+
+    /* Skills Grid */
+    .skills-section p {
+      margin: 3px 0;
+      font-size: 9.8pt;
+    }
+
+    /* Projects */
+    .project-item {
+      margin-bottom: 8px;
+    }
+    .project-header {
+      font-size: 10.5pt;
+      font-weight: bold;
+      color: #000000;
+    }
+    .project-header a {
+      font-weight: normal;
+      font-size: 9.5pt;
+      color: #0044bb;
+      text-decoration: underline;
+    }
+    .project-desc {
+      font-size: 9.8pt;
+      color: #222222;
+      margin: 2px 0 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Navigation & Print Button -->
+  <div class="screen-actions">
+    <a href="../index.html" class="btn btn-secondary">← Back to Portfolio</a>
+    <button onclick="window.print()" class="btn btn-primary">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="name">Aadhithya Roopa Preetha Jayantha Kumar</div>
+    <div class="title">Full Stack Developer | Assistant Software Engineer</div>
+    <div class="contact-info">
+      Warsaw, Poland &nbsp;|&nbsp;
+      +48 729 367 154 &nbsp;|&nbsp;
+      <a href="mailto:aadhithyaroopapj@gmail.com">aadhithyaroopapj@gmail.com</a> &nbsp;|&nbsp;
+      <a href="https://arpj2026.github.io/portfolio_website/">Live Portfolio</a> &nbsp;|&nbsp;
+      <a href="https://github.com/arpj2026">GitHub</a>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <h2 class="section-title">Professional Summary</h2>
+  <p style="margin: 4px 0 10px 0; text-align: justify;">
+    Motivated and detail-oriented Full Stack Web Developer and Assistant Software Engineer with 2 years of hands-on industry experience building, maintaining, and deploying web applications using PHP, Python, MySQL, and WordPress. Demonstrated expertise in developing responsive, cross-browser frontend interfaces using HTML5, CSS3, JavaScript, jQuery, and Bootstrap. Experienced handling end-to-end client project lifecycles from requirement analysis and relational database architecture to production launch, SEO optimization, and bug fixing. Adept at cross-functional teamwork and direct client communications.
+  </p>
+
+  <!-- Technical Skills -->
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-section">
+    <p><strong>Languages:</strong> PHP, Python, JavaScript (ES6+), SQL, HTML5, CSS3</p>
+    <p><strong>Frameworks & Libraries:</strong> Bootstrap 5, jQuery, Tailwind CSS, Django Basics</p>
+    <p><strong>Content Management Systems:</strong> WordPress (Custom Theme Development, Plugin Customization, WooCommerce, Admin)</p>
+    <p><strong>Databases:</strong> MySQL, SQL Schema Design, Relational Database Management, CRUD Operations, phpMyAdmin</p>
+    <p><strong>Tools & Deployment:</strong> Git, GitHub, VS Code, cPanel, Web Hosting, SEO Optimization, Cross-Browser Compatibility</p>
+    <p><strong>Professional Competencies:</strong> Full-Stack Development, Agile Team Collaboration, Client Requirement Gathering, Troubleshooting</p>
+  </div>
+
+  <!-- Professional Experience -->
+  <h2 class="section-title">Work Experience</h2>
+
+  <div class="item-header">
+    <span class="item-title">Assistant Software Engineer / Full Stack Developer</span>
+    <span class="item-date">Jan 2022 – Nov 2023</span>
+  </div>
+  <div class="item-subtitle">Suffix E Solutions Pvt. Ltd. — Trivandrum, India</div>
+  <ul>
+    <li>Architected and maintained server-side business logic and secure database workflows for commercial clients using <strong>PHP</strong>, <strong>Python</strong>, and <strong>MySQL</strong>.</li>
+    <li>Engineered responsive, mobile-first frontend interfaces adhering to modern web standards using <strong>HTML5</strong>, <strong>CSS3</strong>, <strong>JavaScript</strong>, <strong>jQuery</strong>, and <strong>Bootstrap</strong>.</li>
+    <li>Designed and customized high-performance <strong>WordPress</strong> themes and custom plugins to meet exact client functional and branding requirements.</li>
+    <li>Managed relational databases in <strong>MySQL</strong>, writing optimized SQL queries, executing data migrations, and implementing CRUD functionality.</li>
+    <li>Oversaw full project lifecycles across diverse industries (Hospitality, Healthcare, Education, E-Commerce, Tech) from initial concept to deployment on <strong>cPanel</strong>.</li>
+    <li>Conducted proactive website troubleshooting, debugging, performance tuning, and technical maintenance.</li>
+    <li>Interfaced directly with international and domestic clients via meetings, technical calls, and email correspondence to gather requirements and deliver updates.</li>
+  </ul>
+
+  <!-- Selected Key Projects -->
+  <h2 class="section-title">Selected Commercial Projects</h2>
+
+  <div class="project-item">
+    <div class="project-header">
+      PharmAyush — Ayurvedic E-Commerce Platform | <a href="https://pharmayush.com/">pharmayush.com</a>
+    </div>
+    <div class="project-desc">
+      <em>Technologies: PHP, MySQL, JavaScript, Bootstrap, Responsive Web Design</em><br>
+      Engineered backend architecture, product catalog categorization, shopping cart workflows, and database queries for an Ayurvedic healthcare e-commerce platform. Coordinated directly with client stakeholders throughout deployment.
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      Biverah Hotel & Suites — Luxury Hospitality Portal | <a href="https://biverah.com/">biverah.com</a>
+    </div>
+    <div class="project-desc">
+      <em>Technologies: WordPress, PHP, JavaScript, CSS3, Mobile-First UI</em><br>
+      Developed custom WordPress theme layouts, room showcase modules, booking inquiry workflows, and responsive navigation for a premier luxury hotel and suites brand.
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      AAM Tech — Enterprise IT & Solutions Portal | <a href="https://aamtech.ae/">aamtech.ae</a>
+    </div>
+    <div class="project-desc">
+      <em>Technologies: WordPress, PHP, Bootstrap, SEO Optimization, cPanel</em><br>
+      Built a corporate web portal for a UAE-based technology provider with service showcase pages, lead capture integration, and on-page SEO structuring.
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      Heavenly Holidays — Travel & Tourism Booking Portal | <a href="https://heavenlyholidays.org/">heavenlyholidays.org</a>
+    </div>
+    <div class="project-desc">
+      <em>Technologies: WordPress, PHP, Custom Forms, Dynamic Layouts</em><br>
+      Crafted an interactive vacation portal featuring seasonal travel packages, dynamic itinerary showcases, and automated customer inquiry routing.
+    </div>
+  </div>
+
+  <div class="project-item">
+    <div class="project-header">
+      Sabarigiri International School — Institutional Web Portal | <a href="https://sabarigiriinternationalschool.com/">sabarigiriinternationalschool.com</a>
+    </div>
+    <div class="project-desc">
+      <em>Technologies: WordPress, PHP, MySQL, Responsive UI</em><br>
+      Constructed a CBSE school web portal managing multi-stakeholder navigation, academic schedules, admission inquiry pipelines, and school notices.
+    </div>
+  </div>
+
+  <!-- Education -->
+  <h2 class="section-title">Education</h2>
+  <div class="item-header">
+    <span class="item-title">Bachelor of Commerce (B.Com)</span>
+    <span class="item-date">Graduated: May 2020</span>
+  </div>
+  <div class="item-subtitle">University of Mysore, Karnataka, India</div>
+
+  <!-- Certifications -->
+  <h2 class="section-title">Certifications & Training</h2>
+  <ul>
+    <li><strong>Intensive Internship Programme:</strong> Scope India, Trivandrum (Aug 2021) — Full-stack web development immersion covering software engineering, relational databases, and project delivery.</li>
+    <li><strong>The Future of the IT Industry, Data Science, AI & Machine Learning:</strong> Industry Seminar (Mar 2023).</li>
+    <li><strong>Computer Hardware & Network:</strong> LBS Institute of Technology for Women (Mar 2016).</li>
+  </ul>
+
+  <!-- Languages -->
+  <h2 class="section-title">Languages</h2>
+  <p style="margin: 4px 0;">
+    <strong>English:</strong> Fluent (Professional proficiency) &nbsp;|&nbsp;
+    <strong>Malayalam:</strong> Native &nbsp;|&nbsp;
+    <strong>Hindi:</strong> Conversational &nbsp;|&nbsp;
+    <strong>Tamil:</strong> Conversational
+  </p>
+
+</body>
+</html>
